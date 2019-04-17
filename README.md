@@ -3,14 +3,22 @@ ServerControlPanel
 
 ServerControlPanel is a simple web panel to stop/start a server.
 
+## Status
+
+The project is minimalist but fully functional and relatively clean.
+
+An important TO-DO feature is internal fail2ban implementation to prevent spamming invalid password attempts.
+
 ## Setup
 
 - Designed to run on remote Linux servers.
 - By default configured to open on port `8011`.
+- Meant to sit behind a proxy server (such as Apache).
+- Strongly recommended that the external access point for the panel is HTTPS only.
 
 Make folder `config` in the server directory, and within it add the following files:
 
-- `password_hash.txt` - fill with a valid server password hash. Connect to the webserver at page `/Home/HashGenerator` to generate a hash.
+- `password_hash.txt` - fill with a valid server password hash. Connect to the webserver at page `/Home/HashGenerator` to generate a hash. Please use a very long and generally strong password.
 - `status_check.sh` - fill with a bash script that will output `true` if server is running, and `false` if not.
 - `stop.sh` - fill with a bash script that will stop the server immediately.
 - `start.sh` - fill with a bash script that will start the server immediately.
