@@ -11,7 +11,26 @@ namespace ServerControlPanel.Models
 {
     public static class FloodPrevention
     {
+        /// <summary>
+        /// How many invalid password attempts in a short period before the attempts are considered spam.
+        /// </summary>
+        public static int MaxAttempts = 4;
+
+        /// <summary>
+        /// How long to reject flooders for.
+        /// </summary>
+        public static TimeSpan RejectFor = new TimeSpan(hours: 0, minutes: 10, seconds: 0);
+
+        /// <summary>
+        /// How often to clear the flood prevention map. This is to reduce risk of RAM waste when a large number of source IPs make invalid auth attempts.
+        /// </summary>
+        public static TimeSpan ClearRate = new TimeSpan(hours: 2, minutes: 0, seconds: 0);
+
+        public static Object ClearingLock = new Object();
+
         public static ConcurrentDictionary<string, FloodTracker> FloodTrackMap = new ConcurrentDictionary<string, FloodTracker>();
+
+        public static DateTimeOffset NextClear = DateTimeOffset.Now;
 
         public static bool ShouldDeny(string flooder)
         {
@@ -31,11 +50,18 @@ namespace ServerControlPanel.Models
                 tracker.Attempts++;
                 tracker.RejectedUntil = DateTimeOffset.Now.Add(RejectFor);
             }
+            if (NextClear < DateTimeOffset.Now)
+            {
+                lock (ClearingLock)
+                {
+                    if (NextClear < DateTimeOffset.Now)
+                    {
+                        NextClear = DateTimeOffset.Now.Add(ClearRate);
+                        FloodTrackMap = new ConcurrentDictionary<string, FloodTracker>();
+                    }
+                }
+            }
         }
-
-        public static int MaxAttempts = 4;
-
-        public static TimeSpan RejectFor = new TimeSpan(hours: 0, minutes: 10, seconds: 0);
 
         public class FloodTracker
         {
