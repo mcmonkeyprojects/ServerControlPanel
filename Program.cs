@@ -9,8 +9,11 @@ namespace ServerControlPanel
 {
     public class Program
     {
+        public static string PasswordHash;
+
         public static void Main(string[] args)
         {
+            PasswordHash = File.ReadAllText("./config/password_hash.txt");
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())

@@ -4,15 +4,9 @@
 }
 
 <script>
-    function autohide(element) {
-        document.getElementById(element).style.display = 'none';
-    }
-    function autoshow(element) {
-        document.getElementById(element).style.display = 'block';
-    }
     function submitChange(type) {
         var postRequest = new XMLHttpRequest();
-        postRequest.open('POST', '/', true);
+        postRequest.open('POST', '/Home/Post', true);
         postRequest.setRequestHeader('Content-Type', 'text/plain');
         postRequest.onload = function() {
             autohide('please_wait');
@@ -34,7 +28,7 @@
         autohide('success_response');
         autohide('badpassword_response');
         autoshow('please_wait');
-        postRequest.send(type + '/' + document.getElementById('server_control_password'));
+        postRequest.send(type + '/' + document.getElementById('server_control_password').value);
     }
 </script>
 
