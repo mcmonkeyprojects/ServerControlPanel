@@ -55,7 +55,7 @@ namespace ServerControlPanel.Controllers
                 case "status_check":
                     ProcessStartInfo procStart = new ProcessStartInfo("bash", "./config/status_check.sh")
                     {
-                        UseShellExecute = true,
+                        UseShellExecute = false,
                         RedirectStandardOutput = true
                     };
                     Process statusProc = Process.Start(procStart);
