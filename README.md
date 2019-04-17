@@ -13,6 +13,7 @@ The project is minimalist but fully functional and relatively clean.
 
 ## Setup
 
+- Requires ASP.NET Core 2.2 or higher.
 - Designed to run on remote Linux servers.
 - By default configured to open on port `8011`.
 - Meant to sit behind a proxy server (such as Apache).
