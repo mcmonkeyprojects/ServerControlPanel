@@ -40,6 +40,11 @@ namespace ServerControlPanel.Controllers
             {
                 return BadRequest();
             }
+            string sourceIP = Request.Headers["X-Forwarded-For"];
+            if (FloodPrevention.ShouldDeny(sourceIP))
+            {
+                return Ok("flood_block/");
+            }
             string command = bodyText.Substring(0, slash);
             string password = bodyText.Substring(slash + 1);
             if (command == "generate_hash")
@@ -48,6 +53,7 @@ namespace ServerControlPanel.Controllers
             }
             if (!UserValidator.CheckValidPassword(Program.PasswordHash, password))
             {
+                FloodPrevention.NoteFlooding(sourceIP);
                 return Ok("bad_password/");
             }
             switch (command)

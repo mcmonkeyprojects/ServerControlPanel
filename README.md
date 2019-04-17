@@ -7,7 +7,9 @@ ServerControlPanel is a simple web panel to stop/start a server.
 
 The project is minimalist but fully functional and relatively clean.
 
-An important TO-DO feature is internal fail2ban implementation to prevent spamming invalid password attempts.
+## Notes
+
+- There is a password attempt flood prevention system. Too many invalid passwords from one IP in a short period of time will result in the user being blocked temporarily.
 
 ## Setup
 
@@ -23,6 +25,46 @@ Make folder `config` in the server directory, and within it add the following fi
 - `stop.sh` - fill with a bash script that will stop the server immediately.
 - `start.sh` - fill with a bash script that will start the server immediately.
 - `restart.sh` - fill with a bash script that will restart the server immediately.
+
+## Sample Scripts
+
+Here are sample scripts for a simple screen-based server to be tracked.
+
+`status_check.sh:`
+```sh
+#!/bin/bash
+
+SCREEN_LIST=`screen -ls`
+
+if [[ $SCREEN_LIST == *'screen_name'* ]]; then
+    echo 'true'
+else
+    echo 'false'
+fi
+```
+
+`stop.sh`:
+```sh
+#!/bin/bash
+
+screen -S screen_name -X kill
+```
+
+`start.sh`:
+```sh
+#!/bin/bash
+
+cd ~/my_server/
+screen -dmS screen_name ./start.sh
+```
+
+`restart.sh:`
+```sh
+#!/bin/bash
+
+./stop.sh
+./start.sh
+```
 
 ## License
 

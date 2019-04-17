@@ -16,6 +16,9 @@
             else if (this.responseText.startsWith('bad_password/')) {
                 autoshow('badpassword_response');
             }
+            else if (this.responseText.startsWith('flood_block/')) {
+                autoshow('flooddeny_response');
+            }
             else if (this.responseText.startsWith('status/online/')) {
                 autoshow('status_online');
                 autohide('status_offline');
@@ -27,6 +30,7 @@
         }
         autohide('success_response');
         autohide('badpassword_response');
+        autohide('flooddeny_response');
         autoshow('please_wait');
         postRequest.send(type + '/' + document.getElementById('server_control_password').value);
     }
@@ -38,10 +42,17 @@
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
     </div>
 </div>
+
+<div class="alert alert-dismissible alert-danger" style="max-width:800px;display:none;" id="flooddeny_response">
+    <button type="button" class="close" data-dismiss="alert" onclick="autohide('flooddeny_response');">&times;</button>
+    <strong>Failed!</strong> Server refused your attempt due to flooding. Please wait a few minutes before trying again.
+</div>
+
 <div class="alert alert-dismissible alert-danger" style="max-width:800px;display:none;" id="badpassword_response">
     <button type="button" class="close" data-dismiss="alert" onclick="autohide('badpassword_response');">&times;</button>
     <strong>Failed!</strong> Invalid password.
 </div>
+
 <div class="alert alert-dismissible alert-success" style="max-width:800px;display:none;" id="success_response">
     <button type="button" class="close" data-dismiss="alert" onclick="autohide('success_response');">&times;</button>
     Okay! Command received, please wait a moment for it to take effect.
