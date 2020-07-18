@@ -56,7 +56,7 @@ namespace ServerControlPanel.Controllers
             if (!UserValidator.CheckValidPassword(Program.PasswordHash, password))
             {
                 FloodPrevention.NoteFlooding(sourceIP);
-                Console.WriteLine("Password failed for " + sourceIP);
+                Console.WriteLine($"Password failed for {sourceIP} with length {password.Length}");
                 return Ok("bad_password/");
             }
             Console.WriteLine($"Accepting command {command} for {sourceIP}");
