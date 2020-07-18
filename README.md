@@ -63,8 +63,8 @@ screen -dmS screen_name ./start.sh
 ```sh
 #!/bin/bash
 
-./stop.sh
-./start.sh
+./config/stop.sh
+./config/start.sh
 ```
 
 ## License

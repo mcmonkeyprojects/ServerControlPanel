@@ -15,7 +15,7 @@ namespace ServerControlPanel
         {
             if (File.Exists("./config/password_hash.txt"))
             {
-                PasswordHash = File.ReadAllText("./config/password_hash.txt");
+                PasswordHash = File.ReadAllText("./config/password_hash.txt").Replace("\r", "").Replace("\n", "");
                 Console.WriteLine("Found password version " + PasswordHash[0..(PasswordHash.IndexOf(':'))]);
             }
             else
