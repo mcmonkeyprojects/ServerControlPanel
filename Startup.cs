@@ -28,7 +28,6 @@ namespace ServerControlPanel
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
             app.Use(async (context, next) =>
             {
                 await next();
@@ -38,7 +37,6 @@ namespace ServerControlPanel
                     await next();
                 }
             });
-
             app.UseRouting();
             app.UseStaticFiles();
 

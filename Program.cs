@@ -13,14 +13,20 @@ namespace ServerControlPanel
 
         public static void Main(string[] args)
         {
-            PasswordHash = File.ReadAllText("./config/password_hash.txt");
+            if (File.Exists("./config/password_hash.txt"))
+            {
+                PasswordHash = File.ReadAllText("./config/password_hash.txt");
+            }
+            else
+            {
+                PasswordHash = "UNSET";
+            }
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
-
             host.Run();
         }
     }

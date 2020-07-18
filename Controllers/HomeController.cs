@@ -33,7 +33,7 @@ namespace ServerControlPanel.Controllers
                 return NotFound();
             }
             StreamReader body = new StreamReader(Request.Body);
-            string bodyText = body.ReadToEnd();
+            string bodyText = body.ReadToEndAsync().Result;
             body.Close();
             int slash = bodyText.IndexOf('/');
             if (slash <= 0)
