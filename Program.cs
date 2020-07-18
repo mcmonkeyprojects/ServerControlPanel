@@ -16,10 +16,12 @@ namespace ServerControlPanel
             if (File.Exists("./config/password_hash.txt"))
             {
                 PasswordHash = File.ReadAllText("./config/password_hash.txt");
+                Console.WriteLine("Found password version " + PasswordHash[0..(PasswordHash.IndexOf(':'))]);
             }
             else
             {
                 PasswordHash = "UNSET";
+                Console.WriteLine("Warning: password not set");
             }
             var host = new WebHostBuilder()
                 .UseKestrel()

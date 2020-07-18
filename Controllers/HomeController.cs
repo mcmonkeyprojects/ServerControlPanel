@@ -43,19 +43,23 @@ namespace ServerControlPanel.Controllers
             string sourceIP = Request.Headers["X-Forwarded-For"];
             if (FloodPrevention.ShouldDeny(sourceIP))
             {
+                Console.WriteLine("Flood blocked " + sourceIP);
                 return Ok("flood_block/");
             }
             string command = bodyText.Substring(0, slash);
             string password = bodyText.Substring(slash + 1);
             if (command == "generate_hash")
             {
+                Console.WriteLine("Generated has for " + sourceIP);
                 return Ok("hash_response/" + UserValidator.Hash(password) + "/");
             }
             if (!UserValidator.CheckValidPassword(Program.PasswordHash, password))
             {
                 FloodPrevention.NoteFlooding(sourceIP);
+                Console.WriteLine("Password failed for " + sourceIP);
                 return Ok("bad_password/");
             }
+            Console.WriteLine($"Accepting command {command} for {sourceIP}");
             switch (command)
             {
                 case "status_check":
