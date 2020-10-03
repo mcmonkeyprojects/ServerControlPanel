@@ -63,32 +63,19 @@ namespace ServerControlPanel.Controllers
             switch (command)
             {
                 case "status_check":
-                    ProcessStartInfo procStart = new ProcessStartInfo("bash", "./config/status_check.sh")
-                    {
-                        UseShellExecute = false,
-                        RedirectStandardOutput = true
-                    };
-                    Process statusProc = Process.Start(procStart);
-                    StreamReader reader = statusProc.StandardOutput;
-                    statusProc.WaitForExit();
-                    string result = reader.ReadToEnd();
-                    reader.Close();
-                    if (result.ToLowerInvariant().Trim() == "true")
+                    if (ServerLogicExecutor.StatusCheck())
                     {
                         return Ok("status/online/");
                     }
                     return Ok("status/offline/");
                 case "start":
-                    Process startProc = Process.Start("bash", "./config/start.sh");
-                    startProc.WaitForExit();
+                    ServerLogicExecutor.Start();
                     return Ok("success/");
                 case "restart":
-                    Process restartProc = Process.Start("bash", "./config/restart.sh");
-                    restartProc.WaitForExit();
+                    ServerLogicExecutor.Restart();
                     return Ok("success/");
                 case "stop":
-                    Process stopProc = Process.Start("bash", "./config/stop.sh");
-                    stopProc.WaitForExit();
+                    ServerLogicExecutor.Stop();
                     return Ok("success/");
                 default:
                     return BadRequest();

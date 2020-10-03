@@ -3,6 +3,8 @@ ServerControlPanel
 
 ServerControlPanel is a simple web panel to stop/start a server.
 
+It also provides the optional ability to trigger automatic restarts if the server crashes (or otherwise stops externally to the panel).
+
 ## Status
 
 The project is minimalist but fully functional and relatively clean.
@@ -26,6 +28,7 @@ Make folder `config` in the server directory, and within it add the following fi
 - `stop.sh` - fill with a bash script that will stop the server immediately.
 - `start.sh` - fill with a bash script that will start the server immediately.
 - `restart.sh` - fill with a bash script that will restart the server immediately.
+- `config.txt` - for other configuration (see example).
 
 ## Sample Scripts
 
@@ -59,13 +62,23 @@ cd ~/my_server/
 screen -dmS screen_name ./start.sh
 ```
 
-`restart.sh:`
+`restart.sh`:
 ```sh
 #!/bin/bash
 
 ./config/stop.sh
 ./config/start.sh
 ```
+
+`config.txt`:
+```
+auto_check=true
+check_rate=300
+double_check=true
+```
+`auto_check`: 'true' means check server status and start it if it's stopped (except when 'stop' was intentionally triggered on the panel) and restarts if so.
+`check_rate`: set to time (in seconds) between status checks.
+`double_check`: 'true' means two failed status checks in a row (with check_rate time in between) required to trigger a restart (to avoid accidentally triggering a new restart mid pre-existing restart).
 
 ## License
 
