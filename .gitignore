@@ -4,3 +4,4 @@ obj/
 config/
 *.suo
 *.user
+.vs/

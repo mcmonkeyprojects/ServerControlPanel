@@ -61,6 +61,10 @@ namespace ServerControlPanel
                         {
                             Console.WriteLine("Server appears down, will double check...");
                             Task.Delay(ServerSettings.CheckRateSeconds * 1000).Wait();
+                            if (!ServerLogicExecutor.ShouldBeRunning)
+                            {
+                                continue;
+                            }
                             bool isRunningDoubleCheck = ServerLogicExecutor.StatusCheck();
                             if (isRunningDoubleCheck)
                             {

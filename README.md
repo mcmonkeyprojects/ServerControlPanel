@@ -82,4 +82,4 @@ double_check=true
 
 ## License
 
-ServerControlPanel is Copyright (C) 2019-2020 Alex "mcmonkey" Goodwin, All Rights Reserved.
+ServerControlPanel is Copyright (C) 2019-2021 Alex "mcmonkey" Goodwin, All Rights Reserved.
