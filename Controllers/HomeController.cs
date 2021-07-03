@@ -47,7 +47,7 @@ namespace ServerControlPanel.Controllers
                 return Ok("flood_block/");
             }
             string command = bodyText.Substring(0, slash);
-            string password = bodyText.Substring(slash + 1);
+            string password = bodyText[(slash + 1)..];
             if (command == "generate_hash")
             {
                 Console.WriteLine("Generated has for " + sourceIP);
