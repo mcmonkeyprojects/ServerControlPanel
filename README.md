@@ -15,7 +15,7 @@ The project is minimalist but fully functional and relatively clean.
 
 ## Setup
 
-- Requires DotNetCore SDK 3.0 or higher.
+- Requires .NET 5.0 or higher.
 - Designed to run on remote Linux servers.
 - By default configured to open on port `8011`.
 - Meant to sit behind a proxy server (such as Apache).
@@ -70,15 +70,20 @@ screen -dmS screen_name ./start.sh
 ./config/start.sh
 ```
 
+-----
+
 `config.txt`:
 ```
 auto_check=true
 check_rate=300
 double_check=true
 ```
-`auto_check`: 'true' means check server status and start it if it's stopped (except when 'stop' was intentionally triggered on the panel) and restarts if so.
-`check_rate`: set to time (in seconds) between status checks.
-`double_check`: 'true' means two failed status checks in a row (with check_rate time in between) required to trigger a restart (to avoid accidentally triggering a new restart mid pre-existing restart).
+
+- `auto_check`: 'true' means check server status and start it if it's stopped (except when 'stop' was intentionally triggered on the panel) and restarts if so.
+- `check_rate`: set to time (in seconds) between status checks.
+- `double_check`: 'true' means two failed status checks in a row (with check_rate time in between) required to trigger a restart (to avoid accidentally triggering a new restart mid pre-existing restart).
+
+-----
 
 ### Previous License
 
@@ -98,7 +103,7 @@ You can do basically whatever you want, except you may not hold any developer li
 
 The MIT License (MIT)
 
-Copyright (c) 2021 Alex "mcmonkey" Goodwin, All Rights Reserved.
+Copyright (c) 2021 Alex "mcmonkey" Goodwin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
