@@ -14,7 +14,7 @@ namespace ServerControlPanel.Models
         public static bool StatusCheck()
         {
             Console.WriteLine("Status check initiated");
-            ProcessStartInfo procStart = new ProcessStartInfo("bash", "./config/status_check.sh")
+            ProcessStartInfo procStart = new("bash", "./config/status_check.sh")
             {
                 UseShellExecute = false,
                 RedirectStandardOutput = true

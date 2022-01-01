@@ -15,7 +15,7 @@ The project is minimalist but fully functional and relatively clean.
 
 ## Setup
 
-- Requires .NET 5.0 or higher.
+- Requires .NET 6.0 or higher.
 - Designed to run on remote Linux servers.
 - By default configured to open on port `8011`.
 - Meant to sit behind a proxy server (such as Apache).
@@ -103,7 +103,7 @@ You can do basically whatever you want, except you may not hold any developer li
 
 The MIT License (MIT)
 
-Copyright (c) 2021 Alex "mcmonkey" Goodwin
+Copyright (c) 2021-2022 Alex "mcmonkey" Goodwin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

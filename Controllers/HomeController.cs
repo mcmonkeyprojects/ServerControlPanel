@@ -32,7 +32,7 @@ namespace ServerControlPanel.Controllers
             {
                 return NotFound();
             }
-            StreamReader body = new StreamReader(Request.Body);
+            StreamReader body = new(Request.Body);
             string bodyText = body.ReadToEndAsync().Result;
             body.Close();
             int slash = bodyText.IndexOf('/');
@@ -46,7 +46,7 @@ namespace ServerControlPanel.Controllers
                 Console.WriteLine("Flood blocked " + sourceIP);
                 return Ok("flood_block/");
             }
-            string command = bodyText.Substring(0, slash);
+            string command = bodyText[..slash];
             string password = bodyText[(slash + 1)..];
             if (command == "generate_hash")
             {

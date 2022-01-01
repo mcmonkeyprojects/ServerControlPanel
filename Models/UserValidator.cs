@@ -32,7 +32,7 @@ namespace ServerControlPanel.Models
 
         private static byte[] GetPbkdf2Bytes(string password, byte[] salt, int iterations, int outputBytes)
         {
-            Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt)
+            Rfc2898DeriveBytes pbkdf2 = new(password, salt)
             {
                 IterationCount = iterations
             };

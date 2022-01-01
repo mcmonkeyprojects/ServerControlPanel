@@ -19,16 +19,16 @@ namespace ServerControlPanel.Models
         /// <summary>
         /// How long to reject flooders for.
         /// </summary>
-        public static TimeSpan RejectFor = new TimeSpan(hours: 0, minutes: 10, seconds: 0);
+        public static TimeSpan RejectFor = new(hours: 0, minutes: 10, seconds: 0);
 
         /// <summary>
         /// How often to clear the flood prevention map. This is to reduce risk of RAM waste when a large number of source IPs make invalid auth attempts.
         /// </summary>
-        public static TimeSpan ClearRate = new TimeSpan(hours: 2, minutes: 0, seconds: 0);
+        public static TimeSpan ClearRate = new(hours: 2, minutes: 0, seconds: 0);
 
-        public static Object ClearingLock = new Object();
+        public static Object ClearingLock = new();
 
-        public static ConcurrentDictionary<string, FloodTracker> FloodTrackMap = new ConcurrentDictionary<string, FloodTracker>();
+        public static ConcurrentDictionary<string, FloodTracker> FloodTrackMap = new();
 
         public static DateTimeOffset NextClear = DateTimeOffset.Now;
 
